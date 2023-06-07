@@ -1,15 +1,12 @@
 export function PageAPropos() {
   return (
-    <div className="mb-16 flex-1 lg:px-9 lg:text-lg  2xl:text-2xl">
-      <div className="relative -z-10 h-[26rem]  overflow-hidden  lg:aspect-[5/2] lg:h-full">
+    <div className="mb-16 flex-1 lg:px-4 lg:text-lg  2xl:text-2xl">
+      <div className="relative h-[26rem] w-full  overflow-hidden  sm:px-4 lg:aspect-[5/2] lg:h-auto lg:px-0">
         <img
-          src="https://picsum.photos/100/300"
-          alt=""
-          className=" w-full object-cover "
+          src="images/a_propos.jpg"
+          alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug."
+          className="h-full w-full object-cover object-left"
         />
-        <p className="absolute bottom-0 left-0 w-44 pb-2  pl-4 text-white sm:top-0 sm:pt-3 2xl:leading-8">
-          À propos de nous
-        </p>
       </div>
       <section className="px-4 lg:px-0">
         <hr className=" mb-4 mt-6 hidden border-black lg:block" />

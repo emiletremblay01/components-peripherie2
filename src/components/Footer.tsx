@@ -33,7 +33,7 @@ const villesAvecPointsDeVente: villeAvecPointsDeVente[] = [
 // main component
 export function Footer() {
   return (
-    <div className="w-full shrink-0 border-t border-gray-900 bg-footer px-4 pt-4 lg:px-9 ">
+    <div className="w-full shrink-0 border-t border-gray-900 bg-footer px-4 pt-4  ">
       <div className="mx-auto justify-between gap-2 sm:grid sm:grid-cols-2 sm:grid-rows-1">
         <LeftSection />
         <RightSection listeDeVilles={villesAvecPointsDeVente} />
