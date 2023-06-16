@@ -5,19 +5,19 @@
 @layer base {
   @font-face {
     font-family: "ABCSocial";
-    src: url(public/fonts/ABCSocial-Book.woff2) format("woff2"),
-      url(public/fonts/ABCSocial-Book.woff) format("woff");
+    src: url(assets/fonts/ABCSocial-Book.woff2) format("woff2"),
+      url(assets/fonts/ABCSocial-Book.woff) format("woff");
     font-weight: normal;
   }
   @font-face {
     font-family: "ABCSocial";
-    src: url(public/fonts/ABCSocial-Medium.woff2) format("woff2"),
-      url(public/fonts/ABCSocial-Medium.woff) format("woff");
+    src: url(assets/fonts/ABCSocial-Medium.woff2) format("woff2"),
+      url(assets/fonts/ABCSocial-Medium.woff) format("woff");
     font-weight: 700;
   }
   @font-face {
     font-family: "G2Ciao";
-    src: url(public/fonts/G2Ciao-Shrill.woff2) format("woff2"),
-      url(public/fonts/G2Ciao-Shrill.woff) format("woff");
+    src: url(assets/fonts/G2Ciao-Shrill.woff2) format("woff2"),
+      url(assets/fonts/G2Ciao-Shrill.woff) format("woff");
   }
 }
