@@ -56,7 +56,7 @@ export function PageAPropos() {
               journalisme, de la littérature, du design et de la photographie.
             </p>
             <hr className="mb-1 mt-2 border-black lg:hidden" />
-            <div className="mb-4 grid min-w-min max-w-xl grid-cols-2  lg:max-w-3xl">
+            <div className="mb-4 grid min-w-min max-w-xl grid-cols-2  text-xs sm:text-base lg:max-w-3xl lg:text-lg 2xl:text-2xl">
               <p>Florence La Rochelle</p>
               <p>Fondatrice et rédactrice en chef</p>
               <p>Émile Painchaud</p>

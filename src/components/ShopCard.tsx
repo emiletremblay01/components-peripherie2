@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { tw } from "../utils/utils";
 import { useState } from "react";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { Transition } from "@headlessui/react";
@@ -27,9 +28,12 @@ export function ShopCard({
       {/* Card */}
       <div className="group  flex h-96 w-full flex-col border-b border-t border-black bg-white sm:h-80 sm:border">
         <div
-          className={`group/image-container relative grow cursor-pointer overflow-clip border-black ${
-            !isOpened && "border-b"
-          } `}
+          className={tw(
+            "group/image-container relative grow cursor-pointer overflow-clip border-black",
+            {
+              "border-b": !isOpened,
+            }
+          )}
         >
           {/* Image */}
           <img

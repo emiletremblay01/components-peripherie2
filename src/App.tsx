@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { PageAccueil } from "./pages/PageAccueil";
 import { PageAPropos } from "./pages/PageAPropos";
 import { PageBoutique } from "./pages/PageBoutique";
+import { PageEditionActuelle } from "./pages/PageEditionActuelle";
 import { PageEditionsPrecedentes } from "./pages/PageEditionsPrecedents";
 import { Routes, Route, NavLink } from "react-router-dom";
 
@@ -63,6 +64,7 @@ export default function App() {
           element={<PageEditionsPrecedentes />}
         />
         <Route path="/a-propos" element={<PageAPropos />} />
+        <Route path="/edition-actuelle" element={<PageEditionActuelle />} />
       </Routes>
 
       <Footer />
