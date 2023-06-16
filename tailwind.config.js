@@ -6,7 +6,6 @@ export default {
     extend: {
       fontFamily: {
         abcsocial: "'ABCSocial', sans-serif",
-
         g2ciao: "'G2Ciao', serif",
       },
       colors: {
