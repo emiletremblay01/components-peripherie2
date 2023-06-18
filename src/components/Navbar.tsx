@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Transition } from "@headlessui/react";
+import { tw } from "../utils/utils";
 
 const pages = [
   { name: "Boutique", path: "/boutique" },
@@ -40,7 +41,7 @@ function MobileMenu({
   return (
     <header className="fixed z-50 flex w-full items-center justify-between px-4 pt-2 sm:hidden">
       <div className="overflow-clip">
-        <NavLink to="/">
+        <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
           <img
             src="images/peripherie_logotype_noir.png"
             alt="logo"
@@ -57,19 +58,23 @@ function MobileMenu({
           className="group flex h-5 w-6 flex-col justify-between overflow-visible "
         >
           <div
-            className={`h-1 w-full origin-right bg-black transition-transform ease-in-out ${
-              isMenuOpen && " -rotate-45  scale-95 "
-            }`}
+            className={tw(
+              "h-1 w-full origin-right bg-black transition-transform ease-in-out",
+              { "-rotate-45 scale-95": isMenuOpen }
+            )}
           ></div>
           <div
-            className={`h-1 w-full bg-black transition-transform ease-in-out ${
-              isMenuOpen && " translate-x-16 "
-            }`}
+            className={tw(
+              "h-1 w-full bg-black transition-transform ease-in-out",
+              { "translate-x-16": isMenuOpen }
+            )}
           ></div>
+
           <div
-            className={`h-1 w-full origin-right  bg-black transition-transform ease-in-out ${
-              isMenuOpen && " rotate-45 scale-95"
-            }`}
+            className={tw(
+              "h-1 w-full origin-right bg-black transition-transform ease-in-out",
+              { "rotate-45 scale-95": isMenuOpen }
+            )}
           ></div>
         </button>
       </div>
@@ -82,7 +87,7 @@ function MobileMenu({
         leave="transition-transform duration-200 ease-in-out"
         leaveFrom="translate-x-0"
         leaveTo="translate-x-full"
-        className="fixed right-0 top-0 -z-10 h-full w-full bg-white px-4 min-[320px]:w-96"
+        className="fixed right-0 top-0 -z-10 h-full w-full bg-white px-4 shadow min-[320px]:w-96"
       >
         {itemsPanier.map((item) => (
           <div className="first:mt-28">
