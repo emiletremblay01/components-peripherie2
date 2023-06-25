@@ -39,45 +39,47 @@ function MobileMenu({
   const toggleMenu = () => setIsMenuOpen((isMenuOpen) => !isMenuOpen);
 
   return (
-    <header className="fixed z-50 flex w-full items-center justify-between px-4 pt-2 sm:hidden">
-      <div className="overflow-clip">
-        <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
-          <img
-            src="images/peripherie_logotype_noir.png"
-            alt="logo"
-            className=" w-28 -translate-x-2"
-          />
-        </NavLink>
-      </div>
-      <div className="flex items-center gap-5">
-        <button className="hover:opacity-80" onClick={togglePanier}>
-          Panier (1)
-        </button>
-        <button
-          onClick={toggleMenu}
-          className="group flex h-5 w-6 flex-col justify-between overflow-visible "
-        >
-          <div
-            className={tw(
-              "h-1 w-full origin-right bg-black transition-transform ease-in-out",
-              { "-rotate-45 scale-95": isMenuOpen }
-            )}
-          ></div>
-          <div
-            className={tw(
-              "h-1 w-full bg-black transition-transform ease-in-out",
-              { "translate-x-16": isMenuOpen }
-            )}
-          ></div>
+    <>
+      <header className="fixed z-50 flex w-full items-center justify-between bg-transparent px-4 pt-2 mix-blend-difference sm:hidden">
+        <div className="overflow-clip ">
+          <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
+            <img
+              src="images/peripherie_logotype_noir.png"
+              alt="logo"
+              className=" w-28 -translate-x-2 invert"
+            />
+          </NavLink>
+        </div>
+        <div className="flex items-center gap-5 bg-transparent ">
+          <button className="invert hover:opacity-80" onClick={togglePanier}>
+            Panier (1)
+          </button>
+          <button
+            onClick={toggleMenu}
+            className="group flex h-5 w-6 flex-col justify-between overflow-visible  "
+          >
+            <div
+              className={tw(
+                "h-1 w-full origin-right bg-white   transition-transform ease-in-out",
+                { "-rotate-45 scale-95": isMenuOpen }
+              )}
+            ></div>
+            <div
+              className={tw(
+                "h-1 w-full bg-white  transition-transform ease-in-out",
+                { "translate-x-16": isMenuOpen }
+              )}
+            ></div>
 
-          <div
-            className={tw(
-              "h-1 w-full origin-right bg-black transition-transform ease-in-out",
-              { "rotate-45 scale-95": isMenuOpen }
-            )}
-          ></div>
-        </button>
-      </div>
+            <div
+              className={tw(
+                "h-1 w-full origin-right bg-white  transition-transform ease-in-out",
+                { "rotate-45 scale-95": isMenuOpen }
+              )}
+            ></div>
+          </button>
+        </div>
+      </header>
       {/* Panier */}
       <Transition
         show={isPanierOpen}
@@ -87,10 +89,10 @@ function MobileMenu({
         leave="transition-transform duration-200 ease-in-out"
         leaveFrom="translate-x-0"
         leaveTo="translate-x-full"
-        className="fixed right-0 top-0 -z-10 h-full w-full bg-white px-4 shadow min-[320px]:w-96"
+        className="fixed right-0 top-0 z-10 h-full w-full bg-white px-4 shadow min-[320px]:w-96"
       >
         {itemsPanier.map((item) => (
-          <div className="first:mt-28">
+          <div className="first:mt-28" key={item.name}>
             <hr className="h-0.5  bg-gray-700" />
             <div className="mb-5 flex">
               <p className=" w-52">{item.name}</p>
@@ -128,10 +130,10 @@ function MobileMenu({
         leave="transition-transform duration-200 ease-in-out"
         leaveFrom="translate-x-0"
         leaveTo="translate-x-full"
-        className="fixed left-0 top-0 -z-10 h-full w-full bg-white px-4"
+        className="fixed left-0 top-0 z-10 h-full w-full bg-white px-4"
       >
         {pages.map((page) => (
-          <div className="first:mt-28">
+          <div className="first:mt-28" key={page.name}>
             <hr className="mb-1 h-0.5  bg-gray-700" />
             <p className="text-3xl font-bold ">
               <NavLink onClick={toggleMenu} to={page.path}>
@@ -141,7 +143,7 @@ function MobileMenu({
           </div>
         ))}
       </Transition>
-    </header>
+    </>
   );
 }
 

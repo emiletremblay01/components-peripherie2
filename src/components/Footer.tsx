@@ -1,5 +1,12 @@
 import { Disclosure } from "@headlessui/react";
 import { villeAvecPointsDeVente } from "../types/types";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../components/accordion";
+
 const villesAvecPointsDeVente: villeAvecPointsDeVente[] = [
   {
     nom: "Montréal",
@@ -59,7 +66,11 @@ const LeftSection = () => {
   return (
     <div className="sm:max-w-xs lg:max-w-sm 2xl:max-w-lg  ">
       <p className="">
-        <a href="" className="group ">
+        <a
+          href="https://www.facebook.com/PeripherieLeMag"
+          target="_blank"
+          className="group "
+        >
           <span className="group-hover:opacity-80">Facebook</span>{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +89,11 @@ const LeftSection = () => {
         </a>
       </p>
       <p className="">
-        <a href="" className="group ">
+        <a
+          href="https://www.instagram.com/peripherie_lemag/"
+          target="_blank"
+          className="group "
+        >
           <span className="group-hover:opacity-80">Instagram</span>{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +113,10 @@ const LeftSection = () => {
       </p>
 
       <p className="">
-        <a href="" className="hover:underline hover:opacity-80">
+        <a
+          href="mailto:info@peripherie-lemag.com"
+          className="hover:underline hover:opacity-80"
+        >
           info@peripherie-lemag.com
         </a>
       </p>
@@ -137,19 +155,21 @@ const RightSection = ({
         Points de vente
       </p>
       <div className="sm:absolute sm:col-span-2 sm:w-full sm:max-w-xs lg:max-w-sm 2xl:max-w-lg  ">
-        {listeDeVilles.map((ville) => (
-          <Disclosure as="div" className="border-gray-500 last:border-b">
-            <Disclosure.Button className="flex w-full border-t border-gray-500 ">
-              {ville.nom}
-            </Disclosure.Button>
-
-            <Disclosure.Panel className="">
-              {ville.pointsDeVente.map((pointDeVente) => (
-                <p className="pl-4 text-sm">{pointDeVente}</p>
-              ))}
-            </Disclosure.Panel>
-          </Disclosure>
-        ))}
+        <Accordion type="single" collapsible>
+          {listeDeVilles.map((ville) => (
+            <AccordionItem
+              value={ville.nom}
+              className="border-black py-0 first:border-t"
+            >
+              <AccordionTrigger className="py-0">{ville.nom}</AccordionTrigger>
+              <AccordionContent>
+                {ville.pointsDeVente.map((pointDeVente) => (
+                  <p className="pl-2">{pointDeVente}</p>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </div>
   );

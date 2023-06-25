@@ -10,7 +10,7 @@ import { Routes, Route, NavLink } from "react-router-dom";
 
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col ">
+    <div className="flex min-h-screen flex-col bg-white ">
       <div
         role="header"
         className="fixed inset-x-0 bottom-0 z-40 mx-auto mb-2 max-w-xs px-3 sm:hidden "
@@ -23,12 +23,12 @@ export default function App() {
       </div>
       <div
         id="logo-haut-gauche"
-        className="fixed left-3 top-5 hidden w-16 sm:inline"
+        className="fixed left-4 top-5 z-50 hidden w-16 mix-blend-difference invert sm:inline"
       >
         <img
           src="images/peripherie_logotype-variable_milieu_noir.png"
           alt="logo"
-          className="  -translate-x-1 -rotate-90 pt-2"
+          className="-translate-x-1 -rotate-90 pt-2"
         />
         <NavLink
           to="/"
@@ -41,7 +41,7 @@ export default function App() {
       </div>
       <div
         id="logo-bas-droite"
-        className="fixed bottom-5 right-3 z-50 hidden w-16 sm:inline"
+        className="fixed bottom-5 right-4 z-50 hidden w-16 mix-blend-difference invert sm:inline"
       >
         <img
           src="images/peripherie_logotype-variable_milieu_noir.png"

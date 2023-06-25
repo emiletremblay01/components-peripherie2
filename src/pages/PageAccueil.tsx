@@ -3,7 +3,7 @@ import { ButtonWithArrow } from "../components/ButtonWithArrow";
 export function PageAccueil() {
   return (
     <div className="flex flex-1 flex-col items-stretch sm:px-4 xl:mx-auto xl:w-full xl:max-w-7xl">
-      <div className=" relative -z-10 h-[26rem] w-full overflow-hidden ">
+      <div className=" relative z-0 h-[26rem] w-full overflow-hidden ">
         <img
           src="https://picsum.photos/100/300"
           alt=""
@@ -22,7 +22,7 @@ export function PageAccueil() {
           L'émergence, l'ombre, l'alternatif.
         </p>
         <a
-          href=""
+          href="/a-propos"
           className=" mt-3 h-fit w-full min-w-fit grow-0 rounded-full sm:max-w-xs"
         >
           <ButtonWithArrow text="À PROPOS" />
@@ -31,7 +31,7 @@ export function PageAccueil() {
       <hr className=" mx-4 mb-20 mt-9 h-px border-0 bg-gray-700 sm:mx-0" />
       <div className="flex flex-col md:flex-row md:gap-4 ">
         <div className="flex flex-col md:flex-auto">
-          <div className="relative -z-10 h-96 w-full overflow-hidden md:aspect-video md:h-auto">
+          <div className="relative z-0 h-96 w-full overflow-hidden md:aspect-video md:h-auto">
             <img
               src="https://picsum.photos/100/300"
               alt=""
@@ -49,7 +49,7 @@ export function PageAccueil() {
           </a>
         </div>
         <div className="flex flex-col md:flex-auto">
-          <div className="relative -z-10 h-96  w-full overflow-hidden md:aspect-video md:h-auto">
+          <div className="relative z-0 h-96  w-full overflow-hidden md:aspect-video md:h-auto">
             <img
               src="https://picsum.photos/100/300"
               alt=""
