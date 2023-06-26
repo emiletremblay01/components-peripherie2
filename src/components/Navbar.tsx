@@ -1,48 +1,49 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Transition } from "@headlessui/react";
-import { tw } from "../utils/utils";
-
+import { tw } from "../utils/tw";
+import { CartContext } from "../context/CartContext";
+import { v4 as uuidv4 } from "uuid";
 const pages = [
-  { name: "Boutique", path: "/boutique" },
-  { name: "Éditions précédentes", path: "/editions-precedentes" },
-  { name: "Édition actuelle", path: "/edition-actuelle" },
-  { name: "À propos", path: "/a-propos" },
-];
-
-const itemsPanier = [
-  { name: "Autocollants", price: 5, quantity: 1 },
-  { name: "T-shirt", price: 25, quantity: 1 },
-  { name: "Tote bag", price: 15, quantity: 1 },
-  { name: "Tasse", price: 10, quantity: 3 },
+  { id: uuidv4(), name: "Boutique", path: "/boutique" },
+  { id: uuidv4(), name: "Éditions précédentes", path: "/editions-precedentes" },
+  { id: uuidv4(), name: "Édition actuelle", path: "/edition-actuelle" },
+  { id: uuidv4(), name: "À propos", path: "/a-propos" },
 ];
 
 export function Navbar() {
-  const [isPanierOpen, setIsPanierOpen] = useState<boolean>(false);
-  const togglePanier = () => setIsPanierOpen((isPanierOpen) => !isPanierOpen);
+  const { openCart, closeCart, getTotalItemsInCart } = useContext(CartContext);
   return (
     <>
-      <MobileMenu togglePanier={togglePanier} isPanierOpen={isPanierOpen} />
-      <DesktopMenu togglePanier={togglePanier} isPanierOpen={isPanierOpen} />
+      <MobileMenu {...{ openCart, closeCart, getTotalItemsInCart }} />
+      <DesktopMenu {...{ openCart, getTotalItemsInCart }} />
     </>
   );
 }
 
 function MobileMenu({
-  togglePanier,
-  isPanierOpen,
+  openCart,
+  closeCart,
+  getTotalItemsInCart,
 }: {
-  togglePanier: () => void;
-  isPanierOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  getTotalItemsInCart: number;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const toggleMenu = () => setIsMenuOpen((isMenuOpen) => !isMenuOpen);
 
   return (
     <>
-      <header className="fixed z-50 flex w-full items-center justify-between bg-transparent px-4 pt-2 mix-blend-difference sm:hidden">
-        <div className="overflow-clip ">
-          <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
+      <header className="fixed z-50  flex w-full items-center justify-between bg-transparent px-4 pt-2 mix-blend-difference sm:hidden">
+        <div className=" overflow-clip">
+          <NavLink
+            to="/"
+            onClick={() => {
+              setIsMenuOpen(false);
+              closeCart();
+            }}
+          >
             <img
               src="images/peripherie_logotype_noir.png"
               alt="logo"
@@ -51,12 +52,23 @@ function MobileMenu({
           </NavLink>
         </div>
         <div className="flex items-center gap-5 bg-transparent ">
-          <button className="invert hover:opacity-80" onClick={togglePanier}>
-            Panier (1)
+          <button
+            className="invert hover:opacity-80"
+            onClick={() => {
+              openCart();
+              setIsMenuOpen(false);
+            }}
+          >
+            {getTotalItemsInCart > 0 && (
+              <span>Panier ({getTotalItemsInCart})</span>
+            )}
           </button>
           <button
-            onClick={toggleMenu}
-            className="group flex h-5 w-6 flex-col justify-between overflow-visible  "
+            onClick={() => {
+              toggleMenu();
+              closeCart();
+            }}
+            className="group  flex h-5 w-6 flex-col justify-between overflow-visible  "
           >
             <div
               className={tw(
@@ -80,47 +92,7 @@ function MobileMenu({
           </button>
         </div>
       </header>
-      {/* Panier */}
-      <Transition
-        show={isPanierOpen}
-        enter="transition-transform duration-200 ease-in-out"
-        enterFrom="translate-x-full"
-        enterTo="translate-x-0"
-        leave="transition-transform duration-200 ease-in-out"
-        leaveFrom="translate-x-0"
-        leaveTo="translate-x-full"
-        className="fixed right-0 top-0 z-10 h-full w-full bg-white px-4 shadow min-[320px]:w-96"
-      >
-        {itemsPanier.map((item) => (
-          <div className="first:mt-28" key={item.name}>
-            <hr className="h-0.5  bg-gray-700" />
-            <div className="mb-5 flex">
-              <p className=" w-52">{item.name}</p>
-              <p className="flex-1 ">({item.quantity})</p>
-              <p>{item.quantity * item.price}$</p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className=" ml-1 h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18 12H6"
-                />
-              </svg>
-            </div>
-          </div>
-        ))}
-        <hr className="mt-28 h-0.5 bg-gray-700" />
-        <div className="flex justify-between">
-          <p className="font-bold">Total</p>
-          <p className="font-bold">55$</p>
-        </div>
-      </Transition>
+
       {/* Menu */}
       <Transition
         show={isMenuOpen}
@@ -148,74 +120,23 @@ function MobileMenu({
 }
 
 function DesktopMenu({
-  togglePanier,
-  isPanierOpen,
+  openCart,
+  getTotalItemsInCart,
 }: {
-  togglePanier: () => void;
-  isPanierOpen: boolean;
+  openCart: () => void;
+  getTotalItemsInCart: number;
 }) {
   return (
     <header className="hidden text-lg  sm:flex sm:px-4 sm:pb-16 sm:pt-6">
-      <Transition
-        show={isPanierOpen}
-        enter="transition-transform duration-200 ease-in-out"
-        enterFrom="translate-x-full"
-        enterTo="translate-x-0"
-        leave="transition-transform duration-200 ease-in-out"
-        leaveFrom="translate-x-0"
-        leaveTo="translate-x-full"
-        className="fixed right-0 top-0 z-50 h-full w-full bg-white px-4 shadow min-[320px]:w-96"
-      >
-        {itemsPanier.map((item) => (
-          <div className="first:mt-28">
-            <hr className="h-0.5  bg-gray-700" />
-            <div className="mb-5 flex">
-              <p className=" w-52">{item.name}</p>
-              <p className="flex-1 ">({item.quantity})</p>
-              <p>{item.quantity * item.price}$</p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className=" ml-1 h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18 12H6"
-                />
-              </svg>
-            </div>
-          </div>
-        ))}
-        <svg
-          onClick={togglePanier}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="absolute left-0 top-0 m-4 h-6 w-6 cursor-pointer"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-        <hr className="mt-28 h-0.5 bg-gray-700" />
-        <div className="flex justify-between">
-          <p className="font-bold">Total</p>
-          <p className="font-bold">55$</p>
-        </div>
-      </Transition>
       <header className="flex w-full  items-center justify-between gap-1 ">
         {/* Titles */}
         <div className=" my-1 flex shrink-0 items-center gap-6 pl-24">
           {pages.map((page) => (
-            <NavLink to={page.path} className="group relative overflow-visible">
+            <NavLink
+              key={page.id}
+              to={page.path}
+              className="group relative overflow-visible"
+            >
               <p className="font-bold group-hover:opacity-0 ">{page.name}</p>
               <p className="absolute top-0.5 z-10 hidden min-w-max font-g2ciao text-base group-hover:block">
                 {page.name}
@@ -226,9 +147,11 @@ function DesktopMenu({
         <div className="flex flex-1 justify-end pr-4">
           <button
             className="z-40 min-w-max hover:opacity-80"
-            onClick={togglePanier}
+            onClick={openCart}
           >
-            Panier (1)
+            {getTotalItemsInCart > 0 && (
+              <span>Panier ({getTotalItemsInCart})</span>
+            )}
           </button>
         </div>
         <button className="group hidden rounded-full border border-black px-3 transition-opacity ease-in-out hover:bg-gray-600 hover:bg-opacity-5 active:bg-opacity-10 lg:block">
@@ -255,9 +178,3 @@ function DesktopMenu({
     </header>
   );
 }
-
-// function Panier(isPanierOpen: any) {
-//   return (
-
-//   );
-// }

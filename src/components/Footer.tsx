@@ -1,4 +1,3 @@
-import { Disclosure } from "@headlessui/react";
 import { villeAvecPointsDeVente } from "../types/types";
 import {
   Accordion,
@@ -6,9 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../components/accordion";
+import { v4 as uuidv4 } from "uuid";
 
 const villesAvecPointsDeVente: villeAvecPointsDeVente[] = [
   {
+    id: uuidv4(),
     nom: "Montréal",
     pointsDeVente: [
       "Boutique Atelier 10",
@@ -23,6 +24,7 @@ const villesAvecPointsDeVente: villeAvecPointsDeVente[] = [
     ],
   },
   {
+    id: uuidv4(),
     nom: "Québec",
     pointsDeVente: [
       "Librairie du Quartier",
@@ -32,10 +34,15 @@ const villesAvecPointsDeVente: villeAvecPointsDeVente[] = [
     ],
   },
   {
+    id: uuidv4(),
     nom: "Trois-Rivières",
     pointsDeVente: ["Librairie L'Exèdre"],
   },
-  { nom: "Mont-Tremblant", pointsDeVente: ["Librairie Carpe Diem"] },
+  {
+    id: uuidv4(),
+    nom: "Mont-Tremblant",
+    pointsDeVente: ["Librairie Carpe Diem"],
+  },
 ];
 // main component
 export function Footer() {
@@ -158,13 +165,16 @@ const RightSection = ({
         <Accordion type="single" collapsible>
           {listeDeVilles.map((ville) => (
             <AccordionItem
+              key={ville.id}
               value={ville.nom}
               className="border-black py-0 first:border-t"
             >
               <AccordionTrigger className="py-0">{ville.nom}</AccordionTrigger>
               <AccordionContent>
                 {ville.pointsDeVente.map((pointDeVente) => (
-                  <p className="pl-2">{pointDeVente}</p>
+                  <p key={uuidv4()} className="pl-2">
+                    {pointDeVente}
+                  </p>
                 ))}
               </AccordionContent>
             </AccordionItem>

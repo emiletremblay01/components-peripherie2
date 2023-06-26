@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { tw } from "../utils/utils";
-import { useState } from "react";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { tw } from "../utils/tw";
+import { useContext, useState } from "react";
 import { Transition } from "@headlessui/react";
+import { CartContext } from "../context/CartContext";
 type ShopCardProps = {
+  id: number;
   name: string;
   price: number;
   imageUrl: string;
@@ -12,11 +12,13 @@ type ShopCardProps = {
 
 // Main component
 export function ShopCard({
+  id,
   name,
   price,
   imageUrl,
   description,
 }: ShopCardProps) {
+  const { incrementItemQuantity } = useContext(CartContext);
   const [isOpened, setIsOpened] = useState(false);
   function toggleIsOpened() {
     setIsOpened((isOpened) => !isOpened);
@@ -26,7 +28,7 @@ export function ShopCard({
     <div className="w-full sm:max-w-lg">
       <h1 className="px-4 text-lg font-semibold sm:px-0">{name}</h1>
       {/* Card */}
-      <div className="group  flex h-96 w-full flex-col border-b border-t border-black bg-white sm:h-80 sm:border">
+      <div className="group flex h-96 w-full flex-col border-b border-t border-black bg-white sm:h-80 sm:border">
         <div
           className={tw(
             "group/image-container relative grow cursor-pointer overflow-clip border-black",
@@ -63,15 +65,28 @@ export function ShopCard({
             className="flex w-fit flex-auto items-center gap-2 hover:opacity-80 "
           >
             Plus d'infos
-            <FontAwesomeIcon
-              icon={faArrowUp}
-              className={`transition duration-300 ease-in-out ${
-                isOpened && " rotate-180"
-              }`}
-            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.7}
+              stroke="currentColor"
+              className={tw("h-4 w-4 transition duration-300 ease-in-out", {
+                "rotate-180": isOpened,
+              })}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"
+              />
+            </svg>
           </button>
 
-          <button className="w-fit flex-auto text-left hover:opacity-80">
+          <button
+            onClick={() => incrementItemQuantity(id)}
+            className="w-fit flex-auto text-left hover:opacity-80"
+          >
             <span>Ajouter au panier</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
