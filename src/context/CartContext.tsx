@@ -33,14 +33,10 @@ export function CartProvider({ children }: CartProviderProps) {
   );
 
   function openCart(): void {
-    setIsOpen((currentState: boolean) => {
-      return (currentState = true);
-    });
+    setIsOpen(true);
   }
   function closeCart(): void {
-    setIsOpen((currentState: boolean) => {
-      return (currentState = false);
-    });
+    setIsOpen(false);
   }
   function getItemQuantity(id: number): number {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
